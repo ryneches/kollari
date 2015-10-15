@@ -19,10 +19,10 @@ def make( args ) :
       print 'Building fesh template named %s...' % (args.new_name)
     if args.name :
       print 'Building article from notebook %s...' % (args.name)
-      kr = kollari.Article()
+      kr = kollari.Article(args.name.split('.')[0])
       kr.read_notebook( open(args.name) )
-      for section in kr.sections :
-        print section['cell_type']
+      with open( kr.name + '.html', 'w') as f :
+            f.write( kr.make_html() )
 
 def release( args ) :
     """
