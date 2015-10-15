@@ -6,8 +6,7 @@ class Article(object) :
         self.sections = []
 
     def read_notebook( self, notebook ) :
-        nb = json.read( notebook )
-        for cell in nb.items()[2][1][0]['cells'] :
-            self.section = { 'type'     : cell['cell_type'],
-                             'language' : cell['language'] }
+        nb = json.load( notebook )
+        for cell in nb['worksheets'][0]['cells'] :
+            self.sections.append(cell)
         

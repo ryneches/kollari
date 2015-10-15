@@ -15,7 +15,14 @@ def make( args ) :
     """
     Build an article.
     """
-    print 'Building article...'
+    if args.new_name :
+      print 'Building fesh template named %s...' % (args.new_name)
+    if args.name :
+      print 'Building article from notebook %s...' % (args.name)
+      kr = kollari.Article()
+      kr.read_notebook( open(args.name) )
+      for section in kr.sections :
+        print section['cell_type']
 
 def release( args ) :
     """
@@ -46,9 +53,15 @@ parser_make.set_defaults( func=make )
 
 parser_make.add_argument( '--fresh-template',
                           action   = 'store',
-                          dest     = 'name',
+                          dest     = 'new_name',
                           required = False,
                           help     = 'create a fresh article template notebook' )
+
+parser_make.add_argument( '--name',
+                          action   = 'store',
+                          dest     = 'name',
+                          required = False,
+                          help     = 'build an article from a notebook' )
 
 # subcommand 'release' parser
 
