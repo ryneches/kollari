@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+
+import kollari
+import argparse
+
+try :
+    import argcomplete
+    argcomplete_present = True
+except ImportError :
+    argcomplete_present = False
+
+# entry point functions for sub-commands
+
+def make( args ) :
+    """
+    Build an article.
+    """
+    print 'Building article...'
+
+def release( args ) :
+    """
+    Tag an article for release.
+    """
+    print 'Creating tagged release...'
+
+def submit( args ) :
+    """
+    Submit an article to a kollari-compatible journal.
+    """
+    print 'Submitting artile to journal...'
+
+# build the parser...
+
+parser = argparse.ArgumentParser( 
+    description = 'A tool for publishing and operating a scholarly journal',
+    prog = 'kollari' )
+
+subparsers = parser.add_subparsers( help = '', title = 'commands' )
+
+# subcommand 'make' parser
+
+parser_make = subparsers.add_parser( 'make', 
+                                     help = 'build an article' )
+
+parser_make.set_defaults( func=make )
+
+parser_make.add_argument( '--fresh-template',
+                          action   = 'store',
+                          dest     = 'name',
+                          required = False,
+                          help     = 'create a fresh article template notebook' )
+
+# subcommand 'release' parser
+
+parser_release = subparsers.add_parser( 'release', 
+                                        help = 'release an article' )
+
+parser_release.set_defaults( func=release )
+
+parser_release.add_argument( '--release-tag-name',
+                             action   = 'store',
+                             dest     = 'name',
+                             required = True,
+                             help     = 'name of tagged commit for release' )
+
+# subcommand 'submit' parser
+
+parser_submit = subparsers.add_parser( 'submit', 
+                                     help = 'submit an article' )
+
+parser_submit.set_defaults( func=submit )
+
+parser_submit.add_argument( '--journal-url',
+                            action   = 'store',
+                            dest     = 'name',
+                            required = True,
+                            help     = 'URL of the kollari-compatible journal for article submission' )
+
+
+# do the argparse dance
+
+if argcomplete_present :
+    argcomplete.autocomplete(parser)
+
+args = parser.parse_args()
+args.func(args)
+
