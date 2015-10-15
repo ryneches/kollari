@@ -1,6 +1,6 @@
 # kollari
 
-A collection of tools for publishing and operating a scholarly journal
+A tool for publishing and operating a scholarly journal
 
 ### A journal in a box
 
@@ -23,18 +23,24 @@ of some flexibility, this confers several major advantages :
 * Articles are automatically formatted as PDF, HMTL, eBook, and 
   machine-parseable JSON.
 
-The template consists of a git repository (you are looking at it) containing
-an iPython notebook and a few scripts. The notebook is to be filled out with
-the text, code, figures and references. The authors can run the kollari
-pipeline to generate proofs as they prepare the article for submission. Errors
-raised by kollari indicate problems that must be corrected before submission.
-When the  article is finished and all errors are resolved, the authors create
-a tagged  release on GitHub, and submit it to the journal.
+The template consists of an ipython notebook managed under git
+revision control containing all prose, figures and references. The
+kollari tool can create a fresh notebook with the correct layout, or
+the authors can use kollari to format an existing notebook. The
+authors can run the tools to generate proofs as they prepare the
+article for submission. Errors raised by kollari indicate problems
+that must be corrected before submission. Once formatting is complete,
+kollari will help the authors make a tagged release on GitHub and will
+handle submission to a compatible journal.
+
+From this point, the editorial and review process is carried out
+entirely within GitHub; kollari simply formats the manuscript to make this
+possible.
 
 The editors of the journal then clone the tagged release. This makes it
 possible to keep the review process confidential, if that is desired. The
 editors may then recruit reviewers, who may then interact with the journal's
-clone of the  repository by
+clone of the repository by :
 
 * Opening issues
 * Submitting proposed changes in pull requests
@@ -45,11 +51,14 @@ open issues and submit pull requests. By retaining control of the in-review
 clone of the article, the editors have the final say on whether to incorporate
 changes from reviewers or authors and when to mark issues as resolved.
 
-When the editors decide the review process has concluded with a satisfactory
-outcome, they make tagged release of the in-review article, and archive it
-using [Zenodo](https://zenodo.org/). The kollari tools include a script for
-indexing all  publications and generating a journal website using GitHub
-Pages.
+When the editors decide the review process has concluded with a
+satisfactory outcome, they make tagged release of the in-review
+article, and archive it using [Zenodo](https://zenodo.org/). The
+editors can then use kollari to index publications and generate an
+up-to-date journal website using GitHub Pages. The final result is a
+full-featured journal website with publications hosted in several
+formats and archived in a reliable, fixed state with stable URLs and
+DOIs. 
 
 ### Name
 
