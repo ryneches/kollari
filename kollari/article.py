@@ -1,6 +1,6 @@
 import json
 
-class article :
+class Article(object) :
     def __init__( self ) :
         self.name = ''
         self.sections = []
