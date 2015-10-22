@@ -9,6 +9,6 @@ setup(name='kollari',
       author_email='ryneches@ucdavis.edu',
       license='BSD',
       packages=['kollari'],
-      package_data = {'kollari' : ['templates/article.html'] },
+      package_data = {'kollari' : ['templates/article.html', 'templates/article.tex'] },
       include_package_data=True,
       zip_safe=False)

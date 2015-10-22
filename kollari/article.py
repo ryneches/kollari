@@ -20,6 +20,8 @@ def find_templates() :
     paths = map( lambda f : join( join( basedir, 'templates' ), f) , files )
     return dict( zip( types, paths ) )
 
+
+
 class Article(object) :
     def __init__( self, name ) :
         self.name = name
@@ -42,3 +44,21 @@ class Article(object) :
         return T.render( name = self.name,
                          content = markdown.markdown( md ) )
 
+    def make_latex( self ) :
+        # LaTeX clashes with Jinja's defalt delimiters, so...
+        loader = jinja2.PackageLoader('kollari', 'templates')
+        env = jinja2.Environment(   loader                  =   loader,
+                                    trim_blocks             =   True,
+                                    block_start_string      =   '@@',
+                                    block_end_string        =   '@@',
+                                    variable_start_string   =   '@=',
+                                    variable_end_string     =   '=@',
+                                    comment_start_string    =   '@#',
+                                    comment_end_string      =   '#@', )
+        T = env.get_template( 'article.tex' )
+        md = ''
+        for section in filter( lambda x : x['cell_type'] == 'markdown',  self.sections ) :
+            md = md + '\n'.join( section['source'] )
+            md = md + '\n'
+        return T.render( name = self.name,
+                         content = md )

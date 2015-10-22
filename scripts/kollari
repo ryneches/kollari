@@ -22,7 +22,9 @@ def make( args ) :
       kr = kollari.Article(args.name.split('.')[0])
       kr.read_notebook( open(args.name) )
       with open( kr.name + '.html', 'w') as f :
-            f.write( kr.make_html() )
+        f.write( kr.make_html() )
+      with open( kr.name + '.tex', 'w') as f :
+        f.write( kr.make_latex() )
 
 def release( args ) :
     """
